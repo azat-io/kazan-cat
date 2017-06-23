@@ -5,6 +5,7 @@
   "author": "Azat S. <to@azat.io>",
   "license": "GPL-3.0",
   "scripts": {
+    "start": "babel-node \"./app/index.js\"",
     "lint": "eslint . --ignore-path .gitignore",
     "test": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
