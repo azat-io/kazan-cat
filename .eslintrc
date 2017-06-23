@@ -9,6 +9,7 @@
         "no-unused-expressions": 0,
         "max-len": ["error", 80],
         "indent": ["error", 4],
-        "no-useless-escape": 0
+        "no-useless-escape": 0,
+        "no-var": "error"
     }
 }
