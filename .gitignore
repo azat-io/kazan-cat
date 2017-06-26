@@ -14,7 +14,7 @@ coverage
 *~
 
 # Telegram
-etc/config.json
+etc/token.js
 
 # Data
 data
