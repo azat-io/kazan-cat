@@ -1,13 +1,14 @@
 {
   "name": "kazan-cat",
   "description": "One more Telegram bot",
+  "private": true,
   "repository": "git@github.com:azat-io/kazan-cat.git",
   "author": "Azat S. <to@azat.io>",
   "license": "GPL-3.0",
   "scripts": {
     "start": "babel-node \"./app/index.js\"",
     "lint": "eslint . --ignore-path .gitignore",
-    "test": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "test": "jest --coverage && cat \"./coverage/lcov.info\" | coveralls"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
@@ -16,10 +17,10 @@
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
-    "eslint": "^4.1.0",
+    "eslint": "^4.1.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-node": "^5.1.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^20.0.4"
