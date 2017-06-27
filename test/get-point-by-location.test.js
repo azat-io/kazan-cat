@@ -1,6 +1,6 @@
 'use strict'
 
-import getPointByLocation from '../app/get-point-by-location'
+import getPointByLocation from '../components/get-point-by-location'
 
 import { location } from '../etc/config.json'
 

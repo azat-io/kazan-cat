@@ -1,12 +1,11 @@
 'use strict'
 
 import TelegramBot from 'node-telegram-bot-api'
-import token from '../etc/token.js'
-import { location } from '../etc/config.json'
+import token from './etc/token.js'
+import { location } from './etc/config.json'
 
 import fs from 'fs'
-import path from 'path'
-import getPointByLocation from './get-point-by-location'
+import getPointByLocation from './components/get-point-by-location'
 
 const bot = new TelegramBot(token, {
     polling: true,
@@ -36,12 +35,13 @@ bot.onText(/^(О штабе)$/, msg => {
             keyboard: [
                 ['В главное меню'],
             ],
+            selective: false,
             resize_keyboard: true,
             one_time_keyboard: true,
         }),
     }
 
-    const info = fs.readFileSync(path.join(__dirname, './content/info.md'))
+    const info = fs.readFileSync(`${ __dirname }/content/info.md`)
 
     bot.sendMessage(chatId, info, statusMenu)
 

@@ -32,5 +32,5 @@ export default function getPointByLocation (loc) {
 
     return point.then(response => {
         return [response[0].latitude, response[0].longitude]
-    }).catch(error => console.log(error))
+    }).catch(error => error)
 }
