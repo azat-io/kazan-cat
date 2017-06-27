@@ -2,9 +2,12 @@
 
 import TelegramBot from 'node-telegram-bot-api'
 import token from './etc/token.js'
+
 import { location } from './etc/config.json'
 
 import fs from 'fs'
+
+import * as menu from './components/navigation'
 import getPointByLocation from './components/get-point-by-location'
 
 const bot = new TelegramBot(token, {
@@ -12,40 +15,15 @@ const bot = new TelegramBot(token, {
 })
 
 bot.onText(/^(\/start|В главное меню)$/, msg => {
-    const chatId = msg.chat.id
-    const mainMenu = {
-        reply_markup: JSON.stringify({
-            keyboard: [
-                ['О штабе'],
-            ],
-            resize_keyboard: true,
-            one_time_keyboard: true,
-        }),
-    }
-
-    bot.sendMessage(chatId, 'Мяу', mainMenu)
+    bot.sendMessage(msg.chat.id, 'Мяу', menu.start)
 })
 
 bot.onText(/^(О штабе)$/, msg => {
-    const chatId = msg.chat.id
-    const statusMenu = {
-        parse_mode: 'markdown',
-        disable_web_page_preview: true,
-        reply_markup: JSON.stringify({
-            keyboard: [
-                ['В главное меню'],
-            ],
-            selective: false,
-            resize_keyboard: true,
-            one_time_keyboard: true,
-        }),
-    }
-
     const info = fs.readFileSync(`${ __dirname }/content/info.md`)
 
-    bot.sendMessage(chatId, info, statusMenu)
+    bot.sendMessage(msg.chat.id, info, menu.exit)
 
     getPointByLocation(location).then(response => {
-        bot.sendLocation(chatId, response[0], response[1])
+        bot.sendLocation(msg.chat.id, response[0], response[1])
     })
 })
