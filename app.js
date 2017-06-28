@@ -14,8 +14,22 @@ const bot = new TelegramBot(token, {
     polling: true,
 })
 
-bot.onText(/^(\/start|В главное меню)$/, msg => {
-    bot.sendMessage(msg.chat.id, 'Мяу', menu.start)
+bot.onText(/^(\/start)$/, msg => {
+    const start = fs.readFileSync(`${ __dirname }/content/start.md`)
+
+    bot.sendMessage(msg.chat.id, start, menu.start)
+})
+
+bot.onText(/^(В главное меню)$/, msg => {
+    const toMainMessage = [
+        'Вуаля, главное меню',
+        'Пожалуйста',
+        'Выбирай что хочешь',
+    ]
+
+    const random = Math.floor(Math.random() * toMainMessage.length)
+
+    bot.sendMessage(msg.chat.id, toMainMessage[random], menu.start)
 })
 
 bot.onText(/^(О штабе)$/, msg => {
