@@ -14,13 +14,16 @@ import BlueBird from 'bluebird'
  * @returns { Promise }           - Переходя в состояние fulfilled, промис в
  *                                  качестве результата получает число, которое
  *                                  обозначает количество метров между двумя
- *                                  географическими точками при необходимое для
- *                                  преодаления при пешей ходьбе
+ *                                  географическими точками, необходимое для
+ *                                  преодоления дистанции при пешей ходьбе
  *
- * @example
+ * @example Пример использования фунции getDistance
  *
- * getDistance('Казань', 'Москва').then(response => {
- *     console.log(response) // => 790209
+ * const stadium = 'Казань, ул. Ташаяк, 2'
+ * const station = 'Казань, пл. Привокзальная, 1A,'
+ *
+ * getDistance(station, stadium).then(response => {
+ *     console.log(response) // => 1023
  * })
  */
 export default function getDistance (myPoint, yourPoint) {
@@ -35,7 +38,7 @@ export default function getDistance (myPoint, yourPoint) {
         origins: myPoint,
         destinations: yourPoint,
         language: 'ru',
-        mode: 'walking',
+        mode: 'walking', // Пешее расстояние
     }
 
     return new BlueBird((resolve, reject) => {
@@ -44,6 +47,38 @@ export default function getDistance (myPoint, yourPoint) {
                 return reject(error)
             }
 
+            /**
+             * Ниже выводится пример результата вызова функции расчёта
+             * расстояния между двумя географическими точками, переданными
+             * в виде свойств origins и destinations объекта, являющегося
+             * первым аргументом фунции
+             *
+             * @example Результат вызова функции geo.distance()
+             *
+             * {
+             *     destination_addresses: [
+             *         'ул. Ташаяк, 2, Казань, Респ. Татарстан, Россия, 420111'
+             *     ],
+             *     origin_addresses: [
+             *         'Привокзальная пл., 1А, Казань, Респ. Татарстан, ' +
+             *         'Россия, 420202'
+             *     ],
+             *     rows: [{
+             *         elements: [{
+             *             distance: {
+             *                 text: '1,0 км',
+             *                 value: 1023
+             *             },
+             *             duration: {
+             *                 text: '13 мин.',
+             *                 value: 750
+             *             },
+             *             status: 'OK'
+             *         }]
+             *     }],
+             *     status: 'OK'
+             * }
+             */
             return resolve(response.rows[0].elements[0].distance.value)
         })
     })
