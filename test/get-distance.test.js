@@ -7,7 +7,7 @@ test('Определяем расстояние от штаба до испол�
     const destinations = 'Казань, Кремлёвская, 1'
 
     expect.assertions(1)
-    return expect(getDistance(origin, destinations)).resolves.toBe(1191)
+    return expect(getDistance(origin, destinations)).resolves.toBe(2388)
 })
 
 test('Обработка ошибки определения расстояния', () => {
