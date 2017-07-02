@@ -1,0 +1,23 @@
+{
+    "lang": "ru",
+    "excludeFiles": [
+        "node_modules"
+    ],
+    "fileExtensions": [
+        ".md",
+        ".js"
+    ],
+    "ignoreCapitalization": true,
+    "ignoreUrls": true,
+    "checkYo": true,
+    "dictionary": [
+        "бла",
+        "геопозицию",
+        "пн",
+        "промис",
+        "ташаяк",
+        "телеграм",
+        "чулман",
+        "юзернейм"
+    ]
+}

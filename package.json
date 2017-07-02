@@ -7,10 +7,16 @@
   "license": "GPL-3.0",
   "scripts": {
     "start": "babel-node \"./app.js\"",
+    "spellcheck": "yaspeller-ci **/*.{md,js}",
     "lint": "eslint . --ignore-path .gitignore",
+    "lint-staged": "lint-staged",
     "test": "jest --coverage && cat \"./coverage/lcov.info\" | coveralls"
   },
-  "pre-commit": "lint",
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": "lint",
+    "*.{md,js}": "spellcheck"
+  },
   "dependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -28,6 +34,8 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^20.0.4",
-    "pre-commit": "^1.2.2"
+    "lint-staged": "^4.0.0",
+    "pre-commit": "^1.2.2",
+    "yaspeller-ci": "^0.4.0"
   }
 }
