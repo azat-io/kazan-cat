@@ -17,10 +17,10 @@ import BlueBird from 'bluebird'
  *                                  географическими точками, необходимое для
  *                                  преодоления дистанции при пешей ходьбе
  *
- * @example Пример использования фунции getDistance
+ * @example Пример использования функции getDistance
  *
  * const stadium = 'Казань, ул. Ташаяк, 2'
- * const station = 'Казань, пл. Привокзальная, 1A,'
+ * const station = 'Казань, пл. Привокзальная, 1 а,'
  *
  * getDistance(station, stadium).then(response => {
  *     console.log(response) // => 1023
@@ -51,7 +51,7 @@ export default function getDistance (myPoint, yourPoint) {
              * Ниже выводится пример результата вызова функции расчёта
              * расстояния между двумя географическими точками, переданными
              * в виде свойств origins и destinations объекта, являющегося
-             * первым аргументом фунции
+             * первым аргументом функции
              *
              * @example Результат вызова функции geo.distance()
              *
@@ -60,7 +60,7 @@ export default function getDistance (myPoint, yourPoint) {
              *         'ул. Ташаяк, 2, Казань, Респ. Татарстан, Россия, 420111'
              *     ],
              *     origin_addresses: [
-             *         'Привокзальная пл., 1А, Казань, Респ. Татарстан, ' +
+             *         'Привокзальная пл., 1 а, Казань, Респ. Татарстан, ' +
              *         'Россия, 420202'
              *     ],
              *     rows: [{
