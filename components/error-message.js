@@ -1,6 +1,6 @@
 'use strict'
 
-import TelegramBot from 'node-telegram-bot-api'
+import Tgfancy from 'tgfancy'
 
 import { errorToken } from '../etc/token.js'
 
@@ -12,7 +12,7 @@ import { errorToken } from '../etc/token.js'
  *
  */
 export default function errorMessage (message) {
-    const bot = new TelegramBot(errorToken, {
+    const bot = new Tgfancy(errorToken, {
         polling: false,
     })
 
@@ -20,7 +20,7 @@ export default function errorMessage (message) {
      * Список id получателей сообщения об ошибке
      */
     const recepients = [
-        109470339, // @azat_io
+        '@azat_io',
     ]
 
     recepients.forEach(user => {
