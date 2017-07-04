@@ -1,7 +1,7 @@
 'use strict'
 
-import TelegramBot from 'node-telegram-bot-api'
-import token from './etc/token.js'
+import Tgfancy from 'tgfancy'
+import { token } from './etc/token.js'
 
 import { location } from './etc/config.json'
 
@@ -10,7 +10,7 @@ import fs from 'fs'
 import * as menu from './components/navigation'
 import getPointByLocation from './components/get-point-by-location'
 
-const bot = new TelegramBot(token, {
+const bot = new Tgfancy(token, {
     polling: true,
 })
 

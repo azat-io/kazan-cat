@@ -22,8 +22,9 @@
     "babel-preset-es2015": "^6.24.1",
     "bluebird": "^3.5.0",
     "googlemaps": "^1.12.0",
+    "mau": "^0.1.0",
     "node-geocoder": "^3.18.0",
-    "node-telegram-bot-api": "^0.27.1"
+    "tgfancy": "^0.10.0"
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
