@@ -4,7 +4,7 @@
  * Округляет расстояние в метрах до километров, возвращая полученное значение в
  * виде строки
  *
- * @param   { number } distance - Расстояние в метраx
+ * @param   { number } distance - Расстояние в метрах
  * @returns { string }          - Округлённое расстояние в километрах
  */
 export default function roundDistance (distance) {
