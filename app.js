@@ -39,12 +39,24 @@ bot.onText(/^(В главное меню)$/, msg => {
     bot.sendMessage(msg.chat.id, toMainMessage[random], menu.start)
 })
 
-bot.onText(/^(О штабе)$/, msg => {
+bot.onText(/^(Штаб)$/, msg => {
     bot.sendMessage(msg.chat.id, readMD('info'), menu.exit)
 
     getPointByLocation(location).then(response => {
         bot.sendLocation(msg.chat.id, response[0], response[1])
     })
+})
+
+bot.onText(/^(О боте)$/, msg => {
+    bot.sendMessage(msg.chat.id, readMD('about'), menu.about)
+})
+
+bot.onText(/^(Наши планы)$/, msg => {
+    bot.sendMessage(msg.chat.id, readMD('about-plans'), menu.plans)
+})
+
+bot.onText(/^(Как помочь)$/, msg => {
+    bot.sendMessage(msg.chat.id, readMD('about-help'), menu.help)
 })
 
 formset.on('query', (question, msg) => {
@@ -121,7 +133,7 @@ bot.on('message', msg => {
                 })
 
                 data = JSON.parse(data)
-                const top = 3
+                const top = 5
 
                 sortByDistance(id, data, top)
                     .then(response => {
