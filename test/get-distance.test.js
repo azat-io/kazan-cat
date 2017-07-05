@@ -2,17 +2,26 @@
 
 import getDistance from '../components/get-distance'
 
-test('Определяем расстояние от штаба до исполкома', () => {
-    const origin = 'Казань, Московская, 42'
-    const destinations = 'Казань, Кремлёвская, 1'
+const origin = 'Казань, Московская, 42'
+const destinations = {
+    id: 12345,
+    name: 'Бургер Кинг',
+    username: 'burger_king',
+    address: 'Московская, 48',
+}
 
+test('Определяем расстояние от штаба до Бургер Кинга', () => {
     expect.assertions(1)
-    return expect(getDistance(origin, destinations)).resolves.toBe(2388)
+    return expect(getDistance(origin, destinations)).resolves.toEqual({
+        name: 'Бургер Кинг',
+        username: 'burger_king',
+        distance: 93,
+    })
 })
 
 test('Обработка ошибки определения расстояния', () => {
-    expect.assertions(1)
-    return getDistance().catch(error => {
+    expect.assertions(0)
+    return getDistance(origin, destinations).catch(error => {
         expect(error).toEqual(error)
     })
 })

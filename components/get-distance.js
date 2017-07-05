@@ -9,22 +9,35 @@ import BlueBird from 'bluebird'
  *
  * @param   { string }  myPoint   - Адрес с указанием города, улицы, и дома
  *
- * @param   { string }  yourPoint - Второй адрес
+ * @param   { Object }  yourPoint - Адрес, переданный в виде объекта, имеющего
+ *                                  следующие свойства: id - id пользователя,
+ *                                  name - имя пользователя, username - ник
+ *                                  пользователя, address - адрес пользователя
  *
  * @returns { Promise }           - Переходя в состояние fulfilled, промис в
- *                                  качестве результата получает число, которое
- *                                  обозначает количество метров между двумя
- *                                  географическими точками, необходимое для
- *                                  преодоления дистанции при пешей ходьбе
+ *                                  качестве результата возвращает объект со
+ *                                  следующими свойствами: name, username и
+ *                                  distance - число, обозначающее количество
+ *                                  метров между двумя географическими точками,
+ *                                  необходимое для преодоления дистанции при
+ *                                  пешей ходьбе
  *
  * @example Пример использования функции getDistance
  *
- * const stadium = 'Казань, ул. Ташаяк, 2'
  * const station = 'Казань, пл. Привокзальная, 1 а,'
+ * const stadium = {
+ *     id: 12345,
+ *     name: 'Центральный стадион',
+ *     username: 'stadium',
+ *     address: 'Казань, ул. Ташаяк, 2'
+ * }
  *
  * getDistance(station, stadium).then(response => {
- *     console.log(response) // => 1023
- * })
+ *     console.log(response) // => {
+ * })                        //        name: 'Центральный стадион',
+ *                           //        username: 'stadium',
+ *                           //        distance: 1023,
+ *                           //    }
  */
 export default function getDistance (myPoint, yourPoint) {
     const geo = new GoogleMapsAPI({
@@ -35,18 +48,14 @@ export default function getDistance (myPoint, yourPoint) {
     })
 
     const params = {
-        origins: myPoint,
-        destinations: yourPoint,
+        origins: `Россия, г. Казань, ${ myPoint }`,
+        destinations: `Россия, г. Казань, ${ yourPoint.address }`,
         language: 'ru',
         mode: 'walking', // Пешее расстояние
     }
 
     return new BlueBird((resolve, reject) => {
         geo.distance(params, (error, response) => {
-            if (error) {
-                return reject(error)
-            }
-
             /**
              * Ниже выводится пример результата вызова функции расчёта
              * расстояния между двумя географическими точками, переданными
@@ -79,7 +88,12 @@ export default function getDistance (myPoint, yourPoint) {
              *     status: 'OK'
              * }
              */
-            return resolve(response.rows[0].elements[0].distance.value)
+            return resolve({
+                name: yourPoint.name,
+                username: yourPoint.username,
+                distance: response.rows[0].elements[0].distance.value,
+
+            })
         })
     })
 }
