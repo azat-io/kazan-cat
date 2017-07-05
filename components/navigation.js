@@ -3,7 +3,17 @@
 export const start = {
     reply_markup: JSON.stringify({
         keyboard: [
-            ['О штабе'],
+            ['Карта сторонников', 'О штабе'],
+        ],
+        resize_keyboard: true,
+        one_time_keyboard: true,
+    }),
+}
+
+export const yesOrNo = {
+    reply_markup: JSON.stringify({
+        keyboard: [
+            ['Да', 'Не сегодня'],
         ],
         resize_keyboard: true,
         one_time_keyboard: true,
